@@ -1,61 +1,101 @@
 # 🛒 Análise Exploratória de Preços e Descontos no Varejo Supermercadista
 
-Projeto de Análise Exploratória de Dados (EDA) focado na avaliação estatística de políticas de precificação, distribuição de descontos e identificação de anomalias em uma rede de supermercados.
+Projeto de Análise Exploratória de Dados (EDA) focado na avaliação estatística de políticas de precificação, distribuição de descontos e identificação de anomalias no catálogo de produtos de um supermercado chileno.
 
 ---
 
 ## 📌 Visão Geral do Projeto
 
-O objetivo deste projeto é aplicar conceitos de **estatística descritiva** e **visualização de dados** para extrair *insights* sobre o portfólio de produtos, entender a dispersão de preços normais entre categorias e mapear a estratégia de descontos aplicada por categoria e marca.
+Este projeto tem como objetivo aplicar conceitos de **estatística descritiva** e **visualização de dados** para responder perguntas de negócio essenciais:
+- Como se comportam as métricas de tendência central (média vs. mediana) entre categorias?
+- Quais categorias apresentam maior variabilidade e dispersão de preços?
+- Há presença de valores atípicos (*outliers*) e qual a causa-raiz desses desvios?
+- Como estão distribuídos os descontos médios oferecidos por categoria e marca?
 
 ---
 
-## 🛠️ Tecnologias e Bibliotecas Utilizadas
+## 🛠️ Tecnologias e Bibliotecas
 
 - **Python 3.14**
-- [**Pandas**](https://pandas.pydata.org/): Tratamento, limpeza, agrupamento e cálculo de métricas estatísticas.
-- [**Matplotlib**](https://matplotlib.org/): Visualizações estáticas com foco em boas práticas de *Data Storytelling* e *DataViz*.
-- [**Plotly Express**](https://plotly.com/python/): Gráficos interativos e mapas hierárquicos (*Treemaps*).
+- [**Pandas**](https://pandas.pydata.org/): Tratamento, agregação, mapeamento e cálculos estatísticos.
+- [**Matplotlib**](https://matplotlib.org/): Visualizações gráficas estáticas formatadas para *Data Storytelling*.
+- [**Plotly Express**](https://plotly.com/python/): Gráficos hierárquicos e interativos (*Treemap*).
 
 ---
 
-## 📂 Estrutura dos Dados
+## 📂 Dicionário de Dados
 
-A base de dados contém informações sobre itens comercializados, incluindo:
+A base de dados é composta pelas seguintes variáveis:
 
-| Coluna | Descrição |
+| Campo | Descrição |
 | :--- | :--- |
-| `Title` | Nome do produto |
+| `Title` | Nome comercial do produto |
 | `Marca` | Marca do fabricante |
-| `Categoria` | Categoria mercadológica (em espanhol) |
-| `Preco_Normal` | Preço de venda regular (sem desconto) |
-| `Preco_Desconto`| Preço final com desconto aplicado |
-| `Preco_Anterior`| Preço de referência anterior à promoção |
-| `Desconto` | Montante total descontado |
+| `Categoria` | Categoria de produto (em espanhol) |
+| `Preco_Normal` | Preço regular sem aplicação de promoções |
+| `Preco_Desconto` | Preço de venda final com desconto |
+| `Preco_Anterior` | Preço praticado anteriormente |
+| `Desconto` | Valor absoluto monetário do desconto aplicado |
 
 ---
 
-## 🔍 Principais Etapas e Análises
+## 📊 Análises e Resultados
 
-### 1. Medidas de Tendência Central (Média vs. Mediana)
-- Cálculo da média e mediana do `Preco_Normal` por categoria.
-- **Insight:** A maioria das categorias (`lacteos`, `congelados`, `frutas`, etc.) apresenta **assimetria positiva** (média > mediana), evidenciando a presença de itens de alto valor que distorcem a média para cima. Apenas `comidas-preparadas` apresentou mediana superior à média.
-
-### 2. Dispersão e Variabilidade (Desvio Padrão)
-- Avaliação da volatilidade dos preços intra-categoria.
-- **Insight:** A categoria **`lacteos`** apresentou o maior desvio padrão do catálogo, com a média superando a mediana em cerca de 2,4 vezes.
-
-### 3. Detecção de Outliers e Diagnóstico de Causa-Raiz (Boxplot & IQR)
-- Aplicação da regra do Intervalo Interquartil ($IQR = Q_3 - Q_1$) e limite superior ($Q_3 + 1.5 \times IQR$) para a categoria `lacteos`.
-- **Diagnóstico de Negócio:** Investigando os *outliers* extremos (ex: leites com preços muito acima da mediana), identificou-se uma inconsistência cadastral: **produtos comercializados em fardos/engradados cadastrados como unidades simples**. Foi recomendada a normalização por *pack size* para derivar o preço unitário real.
-
-### 4. Intensidade de Descontos por Categoria
-- Gráfico de barras horizontal ordenado e limpo, evidenciando quais departamentos operam com maiores concessões médias de desconto.
-
-### 5. Visão Hierárquica e Portfólio (Treemap Interativo)
-- Gráfico *Treemap* interativo relacionando **Categoria > Marca**, dimensionado pelo **volume de produtos** cadastrados e colorido pela **intensidade média de desconto**.
+### 1. Tendência Central e Dispersão dos Preços
+- **Assimetria Positiva:** A maioria das categorias (`lacteos`, `congelados`, `belleza-y-cuidado-personal`, `frutas`, `verduras` e `instantaneos-y-sopas`) possui **média consideravelmente superior à mediana**, apontando uma cauda alongada à direita gerada por produtos de alto valor.
+- A única exceção observada foi a categoria `comidas-preparadas`, cuja média ficou abaixo da mediana, sugerindo itens pontuais muito baratos puxando a métrica para baixo.
+- **Maior Dispersão:** A categoria **`lacteos`** apresentou o maior desvio padrão entre todas as categorias, com a média chegando a **2,4 vezes** o valor da sua mediana.
 
 ---
+
+### 2. Diagnóstico de Outliers: Categoria Lácteos
+
+Para investigar o alto desvio padrão em `lacteos`, foi plotado um Boxplot e calculado o limite superior via **Intervalo Interquartil ($IQR = Q_3 - Q_1$)**:
+
+$$\text{Limite Superior} = Q_3 + 1{,}5 \times IQR$$
+
+<p align="center">
+  <img src="imagens/boxplot_distribuicao_preco.png" alt="Boxplot da Distribuição de Preço - Lácteos" width="600"/>
+</p>
+
+#### 🔍 Resumo da Análise do Boxplot:
+- **Assimetria Acentuada:** Mediana concentrada na faixa inferior (~$ 989,00), enquanto o terceiro quartil e o limite superior estendem-se significativamente.
+- **Detecção de Valores Atípicos:** Foi encontrada uma quantidade expressiva de registros acima do corte de corte do limite superior.
+- **Causa-Raiz (Insight de Negócio):** Ao inspecionar os itens de maior preço (ex: leite cadastrado a $ 19.788,00), constatou-se uma **inconsistência no nível de agregação de cadastro**: tratava-se de caixas fechadas / engradados com 12 unidades registrados sob o mesmo campo de itens unitários. A recomendação técnica é a criação de uma métrica de preço normalizado por unidade/litro.
+
+---
+
+### 3. Distribuição dos Descontos Médios por Categoria
+
+Comparativo do volume monetário médio concedido em descontos para cada linha de produtos:
+
+<p align="center">
+  <img src="imagens/valor_medio_categia.png" alt="Valor Médio de Desconto Aplicado por Categoria" width="700"/>
+</p>
+
+#### 🔍 Resumo da Análise de Descontos:
+- Categorias de ticket médio mais alto ou perecíveis com maior giro de estoque concentram os maiores valores médios absolutos de desconto.
+- Categorias básicas como hortifrúti (`frutas` e `verduras`) operam com as menores margens de concessão de desconto médio em valor nominal.
+
+---
+
+### 4. Mapeamento Hierárquico: Categoria x Marca x Volume (Treemap)
+- Construção de um *Treemap* interativo com **Plotly Express**, cruzando `Categoria` e `Marca`.
+- O tamanho dos blocos representa o volume de sortimento de produtos (`Quantidade_Produtos`), enquanto a escala de cor contínua reflete a agressividade do `Desconto Médio`.
+
+---
+
+## Estrutura do repositório
+```text
+EBAC-Projeto_3/
+├── imagens/
+│   ├── boxplot_distribuicao_preco.png
+│   └── valor_medio_categia.png
+├── analise_estatistica_supermercado.ipynb
+├── MODULO7_PROJETOFINAL_BASE_SUPERMERCADO.csv
+├── requirements.txt
+└── README.md
+```
 
 ## 🚀 Como Executar o Projeto
 
@@ -76,7 +116,7 @@ A base de dados contém informações sobre itens comercializados, incluindo:
 
 3. Instale as dependências:
    ```bash
-   pip install pandas matplotlib plotly
+   pip install -r requirements.txt
    ```
 
 4. Certifique-se de que o arquivo da base (`MODULO7_PROJETOFINAL_BASE_SUPERMERCADO.csv`) está na raiz do diretório e execute o notebook ou script Python.
