@@ -65,7 +65,7 @@ $$\text{Limite Superior} = Q_3 + 1{,}5 \times IQR$$
 
 ---
 
-### 3. Distribuição dos Descontos Médios por Categoria
+### 3. Comparativo do volume monetário médio concedido em descontos para cada linha de produtos:
 
 Comparativo do volume monetário médio concedido em descontos para cada linha de produtos:
 
@@ -74,8 +74,9 @@ Comparativo do volume monetário médio concedido em descontos para cada linha d
 </p>
 
 #### Resumo da Análise de Descontos:
-- Categorias de ticket médio mais alto ou perecíveis com maior giro de estoque concentram os maiores valores médios absolutos de desconto.
-- Categorias básicas como hortifrúti (`frutas` e `verduras`) operam com as menores margens de concessão de desconto médio em valor nominal.
+- **Concentração Promocional:** Os descontos aplicados concentram-se fortemente nas categorias `congelados` **($ 154,03)** e `belleza-y-cuidado-personal` **($ 123,08)**, que lideram com folga a concessão de reduções de preço nominais.
+- **Descontos Moderados:** Categorias como **`comidas-preparadas` ($ 43,48)** e **`lacteos` ($ 17,41)** apresentam concessões promocionais bem mais tímidas.
+- **Ausência de Descontos ($ 0,00):** As categorias **`frutas`**, **`verduras`** e **`instantaneos-y-sopas`** registraram média de desconto nula ($ 0,00). Isso evidencia que, no período coletado, o supermercado adotou uma política de **preço regular integral** para esses departamentos — seja por margens mais apertadas em produtos de hortifrúti/básicos ou pela falta de campanhas ativas para esses itens.
 
 ---
 
