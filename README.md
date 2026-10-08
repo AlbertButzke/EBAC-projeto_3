@@ -81,6 +81,11 @@ Comparativo do volume monetário médio concedido em descontos para cada linha d
 ---
 
 ### 4. Mapeamento Hierárquico: Categoria x Marca x Volume (Treemap)
+
+<p align="center">
+  <img src="/imagens/mapa_interativo_marcas.png" alt="Mapeamento Hierárquico: Categoria x Marca x Volume" width="700"/>
+</p>
+
 - Construção de um *Treemap* interativo com **Plotly Express**, cruzando `Categoria` e `Marca`.
 - O tamanho dos blocos representa o volume de sortimento de produtos (`Quantidade_Produtos`), enquanto a escala de cor contínua reflete a agressividade do `Desconto Médio`.
 
