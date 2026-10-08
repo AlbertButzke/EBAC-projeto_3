@@ -1,10 +1,10 @@
-# 🛒 Análise Exploratória de Preços e Descontos no Varejo Supermercadista
+# Análise Exploratória de Preços e Descontos no Varejo Supermercadista
 
 Projeto de Análise Exploratória de Dados (EDA) focado na avaliação estatística de políticas de precificação, distribuição de descontos e identificação de anomalias no catálogo de produtos de um supermercado chileno.
 
 ---
 
-## 📌 Visão Geral do Projeto
+## Visão Geral do Projeto
 
 Este projeto tem como objetivo aplicar conceitos de **estatística descritiva** e **visualização de dados** para responder perguntas de negócio essenciais:
 - Como se comportam as métricas de tendência central (média vs. mediana) entre categorias?
@@ -14,7 +14,7 @@ Este projeto tem como objetivo aplicar conceitos de **estatística descritiva** 
 
 ---
 
-## 🛠️ Tecnologias e Bibliotecas
+## Tecnologias e Bibliotecas
 
 - **Python 3.14**
 - [**Pandas**](https://pandas.pydata.org/): Tratamento, agregação, mapeamento e cálculos estatísticos.
@@ -23,7 +23,7 @@ Este projeto tem como objetivo aplicar conceitos de **estatística descritiva** 
 
 ---
 
-## 📂 Dicionário de Dados
+## Dicionário de Dados
 
 A base de dados é composta pelas seguintes variáveis:
 
@@ -39,7 +39,7 @@ A base de dados é composta pelas seguintes variáveis:
 
 ---
 
-## 📊 Análises e Resultados
+## Análises e Resultados
 
 ### 1. Tendência Central e Dispersão dos Preços
 - **Assimetria Positiva:** A maioria das categorias (`lacteos`, `congelados`, `belleza-y-cuidado-personal`, `frutas`, `verduras` e `instantaneos-y-sopas`) possui **média consideravelmente superior à mediana**, apontando uma cauda alongada à direita gerada por produtos de alto valor.
@@ -58,7 +58,7 @@ $$\text{Limite Superior} = Q_3 + 1{,}5 \times IQR$$
   <img src="imagens/boxplot_distribuicao_preco.png" alt="Boxplot da Distribuição de Preço - Lácteos" width="600"/>
 </p>
 
-#### 🔍 Resumo da Análise do Boxplot:
+#### Resumo da Análise do Boxplot:
 - **Assimetria Acentuada:** Mediana concentrada na faixa inferior (~$ 989,00), enquanto o terceiro quartil e o limite superior estendem-se significativamente.
 - **Detecção de Valores Atípicos:** Foi encontrada uma quantidade expressiva de registros acima do corte de corte do limite superior.
 - **Causa-Raiz (Insight de Negócio):** Ao inspecionar os itens de maior preço (ex: leite cadastrado a $ 19.788,00), constatou-se uma **inconsistência no nível de agregação de cadastro**: tratava-se de caixas fechadas / engradados com 12 unidades registrados sob o mesmo campo de itens unitários. A recomendação técnica é a criação de uma métrica de preço normalizado por unidade/litro.
@@ -73,7 +73,7 @@ Comparativo do volume monetário médio concedido em descontos para cada linha d
   <img src="imagens/valor_medio_categia.png" alt="Valor Médio de Desconto Aplicado por Categoria" width="700"/>
 </p>
 
-#### 🔍 Resumo da Análise de Descontos:
+#### Resumo da Análise de Descontos:
 - Categorias de ticket médio mais alto ou perecíveis com maior giro de estoque concentram os maiores valores médios absolutos de desconto.
 - Categorias básicas como hortifrúti (`frutas` e `verduras`) operam com as menores margens de concessão de desconto médio em valor nominal.
 
@@ -97,7 +97,7 @@ EBAC-Projeto_3/
 └── README.md
 ```
 
-## 🚀 Como Executar o Projeto
+## Como Executar o Projeto
 
 1. Clone o repositório:
    ```bash
@@ -123,7 +123,7 @@ EBAC-Projeto_3/
 
 ---
 
-## 👤 Autor
+## Autor
 
 Desenvolvido por **Felipe Alberto Butzke**  
 *Sinta-se à vontade para conectar-se comigo via [LinkedIn](https://www.linkedin.com/in/felipe-alberto-butzke-649986317/) ou abrir uma Issue para sugestões!*
